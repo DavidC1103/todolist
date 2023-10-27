@@ -13,10 +13,11 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/appGuest.css', 'resources/js/appGuest.js'])
+    @vite(['resources/scss/guest.scss', 'resources/js/appGuest.js'])
 </head>
 
 <body>
+    @include('layouts.partials.header')
     @yield('content')
 </body>
 
