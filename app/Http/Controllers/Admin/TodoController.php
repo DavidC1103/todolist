@@ -36,14 +36,16 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|max:255'
+            'title' => 'required|max:255',
         ]);
 
         $new_todo = new Todo();
+        $new_todo->user_id = auth()->user()->id;
         $new_todo->title = $validatedData['title'];
+        $new_todo->date = now();
         $new_todo->save();
 
-        return redirect('/admin');
+        return redirect('/admin')->with('added', 'Task aggiunta con successo!');
     }
 
     /**

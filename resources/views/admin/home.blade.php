@@ -7,11 +7,6 @@
             <div class=" w-100 text-center">
                 <h1 class="fw-bold">Questa è la tua todolist</h1>
 
-                @if (session('deleted'))
-                    <span class="text-success">
-                        {{ session('deleted') }}
-                    </span>
-                @endif
 
                 <form action="{{ route('admin.todos.store') }}" method="POST">
                     @csrf
@@ -26,26 +21,47 @@
                     </div>
                 </form>
 
+                @if (session('deleted'))
+                    <span class="text-success fs-3">
+                        {{ session('deleted') }}
+                    </span>
+                @endif
+                @if (session('added'))
+                    <span class="text-success fs-3">
+                        {{ session('added') }}
+                    </span>
+                @endif
+
                 <div class="dc-container">
-                    <div class="dc-container2 d-flex justify-content-between px-4 py-3">
-                        <div class="fs-3">Titolo</div>
-                        <div class="fs-3">Data</div>
-                        <div class="fs-3">Azioni</div>
-                    </div>
-                    <ul>
-                        @foreach ($todos as $todo)
-                            <li>
-                                <span>{{ $todo->title }}</span>
-
-                                <form action="{{ route('admin.todos.destroy', $todo) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"><i class="fa-solid fa-ban text-danger"></i></button>
-                                </form>
-
-                            </li>
-                        @endforeach
-                    </ul>
+                    @if ($todos->isEmpty())
+                        <span class="fs-3">Non ci sono Task da fare </span>
+                    @else
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-start ps-3 py-3">Titolo</th>
+                                    <th scope="col" class="text-start py-3">Aggiunto il</th>
+                                    <th scope="col" class="py-3">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($todos as $todo)
+                                    <tr>
+                                        <td class="text-start ps-3 py-3">{{ $todo->title }}</td>
+                                        <td class="text-start py-3">{{ $todo->date }}</td>
+                                        <td class="py-3">
+                                            <form action="{{ route('admin.todos.destroy', $todo) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="custom-btn"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
             </div>
         </div>

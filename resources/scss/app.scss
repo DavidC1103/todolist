@@ -1,34 +1,32 @@
 @import '~bootstrap/scss/bootstrap';
 
+body{
+    background-color: rgb(181, 210, 211);
+}
 .dc-mt{
     margin-top: 150px;
 }
 
 .dc-container{
     margin: 0 auto;
-    border-radius: 25px;
-    background-color: rgb(244, 244, 244);
     margin-top: 50px;
 }
 
-ul{
-    list-style:none;
+table{
+    border-radius: 25px !important;
+    background-color: rgb(244, 244, 244);
+    i{
+        color: gray;
+        &:hover{
+            cursor: pointer;
+            color: red;
+        }
+    }
 }
 
-ul li{
-    border-bottom: 1px solid grey;
-    line-height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 30px;
-    cursor: pointer;
+.custom-btn{
+    padding: 0;
+    border: none;
+    background-color: white;
 }
 
-ul li:last-child{
-    border-bottom: 0;
-}
-
-.done{
-    text-decoration: line-through;
-}
