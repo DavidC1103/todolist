@@ -5,7 +5,7 @@
     <div class="container">
         <div class="d-flex justify-content-center dc-mt">
             <div class=" w-100 text-center">
-                <h1 class="fw-bold">Questa è la tua todolist</h1>
+                <h1 class="fw-bold">Ciao {{ ucfirst(Auth::user()->name) }} questa è la tua todolist</h1>
 
 
                 <form action="{{ route('admin.todos.store') }}" method="POST">
@@ -22,12 +22,12 @@
                 </form>
 
                 @if (session('deleted'))
-                    <span class="text-success fs-3">
+                    <span id="alert-message" class="text-success fs-3">
                         {{ session('deleted') }}
                     </span>
                 @endif
                 @if (session('added'))
-                    <span class="text-success fs-3">
+                    <span id="alert-message" class="text-success fs-3">
                         {{ session('added') }}
                     </span>
                 @endif
